@@ -1,24 +1,29 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import About from "../About/About";
 import Footer from "../Footer/Footer";
-import LoginModal from "../LoginModal/LoginModal";
-import RegisterModal from "../RegisterModal/RegisterModal";
-import Preloader from "../Preloader/Preloader";
+import SavedNews from "../SavedNews/SavedNews";
 
-function App() {
+function HomePage() {
   return (
-    <div className="page">
+    <>
       <Header />
       <Main />
       <About />
       <Footer />
+    </>
+  );
+}
 
-      {/* Temporary placeholders so components exist */}
-      <Preloader />
-      <LoginModal />
-      <RegisterModal />
+function App() {
+  return (
+    <div className="page">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/saved-news" element={<SavedNews />} />
+      </Routes>
     </div>
   );
 }

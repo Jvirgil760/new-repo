@@ -1,13 +1,23 @@
 import "./Navigation.css";
+import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
     <nav className="navigation">
-      <p className="navigation__logo">News Explorer</p>
+      <Link to="/" className="navigation__logo">
+        News Explorer
+      </Link>
+
       <ul className="navigation__links">
-        <li>Home</li>
-        <li>Saved Articles</li>
-        <li>Sign In</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/saved-news">Saved Articles</Link>
+        </li>
+        <li>
+          <button type="button">Sign In</button>
+        </li>
       </ul>
     </nav>
   );
