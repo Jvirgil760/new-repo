@@ -1,24 +1,118 @@
+import { useState } from "react";
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import logoutIcon from "../../assets/logout.png";
+import { Link, NavLink } from "react-router-dom";
 
-function Navigation() {
+function Navigation({
+  isLoggedIn = false,
+  isLight = false,
+  userName = "Elise",
+  onLoginClick,
+}) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  function handleToggleMenu() {
+    setIsMobileMenuOpen((prev) => !prev);
+  }
+
+  function handleCloseMenu() {
+    setIsMobileMenuOpen(false);
+  }
+
+  function handleLoginButtonClick() {
+    handleCloseMenu();
+    if (onLoginClick) {
+      onLoginClick();
+    }
+  }
+
   return (
-    <nav className="navigation">
-      <Link to="/" className="navigation__logo">
-        News Explorer
-      </Link>
+    <nav
+      className={`navigation ${
+        isLight ? "navigation_theme_light" : "navigation_theme_dark"
+      }`}
+    >
+      <div className="navigation__content">
+        <Link
+          to="/"
+          className={`navigation__logo ${
+            isLight ? "navigation__logo_theme_light" : ""
+          }`}
+          onClick={handleCloseMenu}
+        >
+          NewsExplorer
+        </Link>
 
-      <ul className="navigation__links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/saved-news">Saved Articles</Link>
-        </li>
-        <li>
-          <button type="button">Sign In</button>
-        </li>
-      </ul>
+        <button
+          type="button"
+          className={`navigation__menu-button ${
+            isLight ? "navigation__menu-button_theme_light" : ""
+          }`}
+          onClick={handleToggleMenu}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMobileMenuOpen ? "×" : "☰"}
+        </button>
+
+        <div
+          className={`navigation__menu ${
+            isMobileMenuOpen ? "navigation__menu_opened" : ""
+          }`}
+        >
+          <NavLink
+            to="/"
+            end
+            onClick={handleCloseMenu}
+            className={({ isActive }) =>
+              `navigation__link ${
+                isLight ? "navigation__link_theme_light" : ""
+              } ${isActive ? "navigation__link_active" : ""}`
+            }
+          >
+            Home
+          </NavLink>
+
+          {isLoggedIn ? (
+            <>
+              <NavLink
+                to="/saved-news"
+                onClick={handleCloseMenu}
+                className={({ isActive }) =>
+                  `navigation__link ${
+                    isLight ? "navigation__link_theme_light" : ""
+                  } ${isActive ? "navigation__link_active" : ""}`
+                }
+              >
+                Saved articles
+              </NavLink>
+
+              <button
+                type="button"
+                className={`navigation__button navigation__button_logged-in ${
+                  isLight ? "navigation__button_theme_light" : ""
+                }`}
+              >
+                <span>{userName}</span>
+                <img
+                  src={logoutIcon}
+                  alt="Log out"
+                  className="navigation__logout-icon"
+                />
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              className={`navigation__button ${
+                isLight ? "navigation__button_theme_light" : ""
+              }`}
+              onClick={handleLoginButtonClick}
+            >
+              Sign in
+            </button>
+          )}
+        </div>
+      </div>
     </nav>
   );
 }

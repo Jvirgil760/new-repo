@@ -1,15 +1,85 @@
 import "./NewsCard.css";
+import bookmarkIcon from "../../assets/bookmark.svg";
+import bookmarkActiveIcon from "../../assets/bookmark-active.svg";
+import trashIcon from "../../assets/trash.svg";
 
-function NewsCard() {
+function NewsCard({
+  card,
+  isLoggedIn = false,
+  isSaved = false,
+  isSavedPage = false,
+  onToggleSave,
+  onDeleteSaved,
+}) {
+  if (!card) return null;
+
+  function handleButtonClick() {
+    if (isSavedPage) {
+      onDeleteSaved?.(card);
+      return;
+    }
+
+    onToggleSave?.(card);
+  }
+
   return (
-    <article className="news-card">
-      <p className="news-card__date">November 4, 2026</p>
-      <h3 className="news-card__title">Sample news article title</h3>
-      <p className="news-card__text">
-        This is placeholder text for a news card component.
-      </p>
-      <p className="news-card__source">News Source</p>
-    </article>
+    <li className="news-card">
+      <article className="news-card__article">
+        <div className="news-card__image-wrapper">
+          {isSavedPage && card.keyword && (
+            <div className="news-card__keyword">{card.keyword}</div>
+          )}
+
+          <img src={card.image} alt={card.title} className="news-card__image" />
+
+          <div className="news-card__action">
+            {!isLoggedIn && !isSavedPage && (
+              <span className="news-card__tooltip">
+                Sign in to save articles
+              </span>
+            )}
+
+            {isSavedPage ? (
+              <>
+                <span className="news-card__tooltip">Remove from saved</span>
+                <button
+                  type="button"
+                  className="news-card__save-button"
+                  aria-label="Remove article"
+                  onClick={handleButtonClick}
+                >
+                  <img
+                    src={trashIcon}
+                    alt=""
+                    className="news-card__save-icon"
+                  />
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                className="news-card__save-button"
+                aria-label={isSaved ? "Remove from saved" : "Save article"}
+                onClick={handleButtonClick}
+              >
+                <img
+                  src={isSaved ? bookmarkActiveIcon : bookmarkIcon}
+                  alt=""
+                  className="news-card__save-icon"
+                />
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="news-card__content">
+          <p className="news-card__date">{card.date}</p>
+          <h3 className="news-card__title">{card.title}</h3>
+          <p className="news-card__text">{card.text}</p>
+          <p className="news-card__source">{card.source}</p>
+        </div>
+      </article>
+    </li>
   );
 }
 

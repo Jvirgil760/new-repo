@@ -1,0 +1,110 @@
+.search-form {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 104px 0;
+    box-sizing: border-box;
+  }
+  
+  .search-form__content {
+    max-width: 608px;
+  }
+  
+  .search-form__title {
+    margin: 0 0 32px;
+    color: #fff;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-size: 60px;
+    line-height: 64px;
+    font-weight: 400;
+  }
+  
+  .search-form__subtitle {
+    margin: 0 0 64px;
+    color: #fff;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+  }
+  
+  .search-form__form {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-form__input {
+    width: 100%;
+    min-height: 64px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 100px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  
+  .search-form__button {
+    position: absolute;
+    right: 0;
+    min-width: 168px;
+    min-height: 64px;
+    border: none;
+    border-radius: 100px;
+    background: #2f71e5;
+    color: #fff;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .search-form__error {
+    margin: 8px 0 0;
+    color: #ff0000;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  @media screen and (max-width: 480px) {
+    .search-form {
+      padding: 30px 16px 32px;
+    }
+  
+    .search-form__content {
+      max-width: 100%;
+    }
+  
+    .search-form__title {
+      margin: 0 0 16px;
+      font-size: 36px;
+      line-height: 40px;
+    }
+  
+    .search-form__subtitle {
+      margin: 0 0 32px;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  
+    .search-form__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  
+    .search-form__input {
+      width: 100%;
+      min-height: 56px;
+      box-sizing: border-box;
+    }
+  
+    .search-form__button {
+      position: static;
+      right: auto;
+      width: 100%;
+      min-height: 56px;
+    }
+  }

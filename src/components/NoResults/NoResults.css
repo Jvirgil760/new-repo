@@ -1,0 +1,46 @@
+.no-results {
+    background: #f5f6f7;
+  }
+  
+  .no-results__content {
+    max-width: 1440px;
+    min-height: 374px;
+    margin: 0 auto;
+    padding: 86px 104px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .no-results__icon {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 31px;
+    object-fit: contain;
+  }
+  
+  .no-results__title {
+    margin: 0 0 16px;
+    color: #1a1b22;
+    font-family: "Roboto Slab", "Times New Roman", serif;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 400;
+  }
+  
+  .no-results__text {
+    margin: 0;
+    color: #b6bcbf;
+    text-align: center;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+  }
+  
+  @media screen and (max-width: 640px) {
+    .no-results__content {
+      padding: 48px 16px;
+    }
+  }

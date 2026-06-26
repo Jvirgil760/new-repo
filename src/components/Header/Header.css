@@ -1,0 +1,28 @@
+.header {
+    width: 100%;
+  }
+  
+  .header_theme_dark {
+    min-height: 576px;
+    color: #fff;
+    background-color: #1a1b22;
+    background-image:
+    linear-gradient(rgba(26, 27, 34, 0.5), rgba(26, 27, 34, 0.5)),
+    url("../../assets/phonebackground.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .header_theme_light {
+    background-color: #fff;
+    color: #1a1b22;
+  }
+
+  @media screen and (max-width: 480px) {
+    .header_theme_dark {
+      min-height: 536px;
+      background-position: center;
+      background-size: cover;
+    }
+  }
