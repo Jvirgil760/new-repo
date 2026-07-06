@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -10,9 +10,12 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { getNews } from "../../utils/newsApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 
 function HomePage({
   onLoginClick,
+  onLogoutClick,
   isLoginOpen,
   isRegisterOpen,
   isSuccessOpen,
@@ -41,6 +44,7 @@ function HomePage({
         isLight={false}
         userName={currentUser ? currentUser.username : "Johnathan"}
         onLoginClick={onLoginClick}
+        onLogoutClick={onLogoutClick}
         onSearch={onSearch}
       />
 
@@ -82,6 +86,8 @@ function HomePage({
 }
 
 function App() {
+  const navigate = useNavigate();
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -239,6 +245,12 @@ function App() {
     setIsLoginOpen(true);
   }
 
+  function handleLogout() {
+    setCurrentUser(null);
+    localStorage.removeItem("currentUser");
+    navigate("/");
+  }
+
   return (
     <div className="page">
       <Routes>
@@ -247,6 +259,7 @@ function App() {
           element={
             <HomePage
               onLoginClick={handleOpenLogin}
+              onLogoutClick={handleLogout}
               isLoginOpen={isLoginOpen}
               isRegisterOpen={isRegisterOpen}
               isSuccessOpen={isSuccessOpen}
@@ -274,14 +287,17 @@ function App() {
         <Route
           path="/saved-news"
           element={
+          <ProtectedRoute is isLoggedIn={!!currentUser}>
             <SavedNews
               cards={savedArticles}
               currentUser={currentUser}
               onDeleteSaved={handleDeleteSaved}
             />
+          </ProtectedRoute>
           }
         />
       </Routes>
+      <div></div>
     </div>
   );
 }

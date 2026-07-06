@@ -5,12 +5,24 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function LoginModal({ isOpen, onClose, onSwitchToRegister, onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const isValid = email.trim() !== "" && password.trim() !== "";
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onLogin({ email, password });
+  }
+
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+    setEmailError(evt.target.validationMessage);
+  }
+  
+  function handlePasswordChange(evt) {
+    setPassword(evt.target.value);
+    setPasswordError(evt.target.validationMessage);
   }
   
   return (
@@ -43,11 +55,10 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister, onLogin }) {
         className="modal__input"
         placeholder="Enter email"
         value={email}
-        onChange={(evt) => setEmail(evt.target.value)}
+        onChange={handleEmailChange}
         required
       />
-
-      <span className="modal__error" />
+      <span className="modal__error">{emailError}</span>
 
       <label className="modal__label" htmlFor="login-password">
         Password
@@ -58,11 +69,12 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister, onLogin }) {
         className="modal__input"
         placeholder="Enter password"
         value={password}
-        onChange={(evt) => setPassword(evt.target.value)}
+        onChange={handlePasswordChange}
         required
+        minLength="6"
       />
 
-      <span className="modal__error" />
+      <span className="modal__error">{passwordError}</span>
     </ModalWithForm>
   );
 }

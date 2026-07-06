@@ -42,7 +42,7 @@ function Main({
   const hasMoreCards = cards.length > cardsToShow;
 
   return (
-    <section className="main">
+    <main className="main">
       <div className="main__content">
         <h2 className="main__title">Search results</h2>
 
@@ -69,7 +69,7 @@ function Main({
           </button>
         )}
       </div>
-    </section>
+    </main>
   );
 }
 

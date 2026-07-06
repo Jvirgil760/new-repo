@@ -7,6 +7,7 @@ function Header({
   isLight = false,
   userName = "Johnathan",
   onLoginClick,
+  onLogoutClick,
   onSearch,
 }) {
   return (
@@ -16,6 +17,7 @@ function Header({
         isLight={isLight}
         userName={userName}
         onLoginClick={onLoginClick}
+        onLogoutClick={onLogoutClick}
       />
       {!isLight && <SearchForm onSearch={onSearch} />}
     </header>

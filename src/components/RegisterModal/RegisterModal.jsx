@@ -1,22 +1,48 @@
 import { useState } from "react";
-import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ isOpen, onClose, onSwitchToLogin, onRegister }) {
+function RegisterModal({
+  isOpen,
+  onClose,
+  onSwitchToLogin,
+  onRegister,
+  serverError = "",
+}) {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [serverError] = useState("");
 
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    onRegister({ email, password, username });
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  function handleUsernameChange(evt) {
+    setUsername(evt.target.value);
+    setUsernameError(evt.target.validationMessage);
+  }
+
+  function handleEmailChange(evt) {
+    setEmail(evt.target.value);
+    setEmailError(evt.target.validationMessage);
+  }
+
+  function handlePasswordChange(evt) {
+    setPassword(evt.target.value);
+    setPasswordError(evt.target.validationMessage);
   }
 
   const isValid =
-  email.trim() !== "" &&
-  password.trim() !== "" &&
-  username.trim() !== "";
+    username.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim() !== "" &&
+    !usernameError &&
+    !emailError &&
+    !passwordError;
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onRegister({ username, email, password });
+  }
 
   return (
     <ModalWithForm
@@ -48,9 +74,10 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin, onRegister }) {
         className="modal__input"
         placeholder="Enter email"
         value={email}
-        onChange={(evt) => setEmail(evt.target.value)}
+        onChange={handleEmailChange}
+        required
       />
-      <span className="modal__error" />
+      <span className="modal__error">{emailError}</span>
 
       <label className="modal__label" htmlFor="register-password">
         Password
@@ -61,9 +88,11 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin, onRegister }) {
         className="modal__input"
         placeholder="Enter password"
         value={password}
-        onChange={(evt) => setPassword(evt.target.value)}
+        onChange={handlePasswordChange}
+        required
+        minLength="6"
       />
-      <span className="modal__error" />
+      <span className="modal__error">{passwordError}</span>
 
       <label className="modal__label" htmlFor="register-username">
         Username
@@ -74,12 +103,15 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin, onRegister }) {
         className="modal__input"
         placeholder="Enter your username"
         value={username}
-        onChange={(evt) => setUsername(evt.target.value)}
+        onChange={handleUsernameChange}
+        required
+        minLength="2"
+        maxLength="30"
       />
-      <span className="modal__error" />
+      <span className="modal__error">{usernameError}</span>
 
       {serverError && (
-        <span className="modal__error modal__error_type_server modal__error_visible">
+        <span className="modal__error modal__error_type_server">
           {serverError}
         </span>
       )}

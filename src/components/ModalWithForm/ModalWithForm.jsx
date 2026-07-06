@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import { useEffect } from "react";
 
 function ModalWithForm({
   title,
@@ -10,6 +11,22 @@ function ModalWithForm({
   children,
   footer,
 }) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleEscClose(evt) {
+      if (evt.key === "Escape") {
+        onClose();
+      }
+    }
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [isOpen, onClose]);
+  
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__overlay" onClick={onClose} />

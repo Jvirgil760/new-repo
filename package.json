@@ -2,6 +2,7 @@
   "name": "stage-1-frontend",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://jvirgil760.github.io/new-repo/",
   "type": "module",
   "scripts": {
     "dev": "vite",

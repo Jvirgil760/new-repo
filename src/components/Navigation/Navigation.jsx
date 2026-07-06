@@ -8,6 +8,7 @@ function Navigation({
   isLight = false,
   userName = "Elise",
   onLoginClick,
+  onLogoutClick,
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,9 +22,12 @@ function Navigation({
 
   function handleLoginButtonClick() {
     handleCloseMenu();
-    if (onLoginClick) {
-      onLoginClick();
-    }
+    onLoginClick?.();
+  }
+
+  function handleLogoutButtonClick() {
+    handleCloseMenu();
+    onLogoutClick?.();
   }
 
   return (
@@ -47,11 +51,13 @@ function Navigation({
           type="button"
           className={`navigation__menu-button ${
             isLight ? "navigation__menu-button_theme_light" : ""
-          }`}
+          } ${isMobileMenuOpen ? "navigation__menu-button_opened" : ""}`}
           onClick={handleToggleMenu}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? "×" : "☰"}
+          <span className="navigation__menu-line" />
+          <span className="navigation__menu-line" />
+          <span className="navigation__menu-line" />
         </button>
 
         <div
@@ -91,6 +97,7 @@ function Navigation({
                 className={`navigation__button navigation__button_logged-in ${
                   isLight ? "navigation__button_theme_light" : ""
                 }`}
+                onClick={handleLogoutButtonClick}
               >
                 <span>{userName}</span>
                 <img
