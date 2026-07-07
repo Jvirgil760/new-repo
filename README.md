@@ -17,3 +17,8 @@ If you are developing a production application, we recommend using TypeScript wi
 
 My deployed link 
 https://jvirgil760.github.io/new-repo/
+
+## Project Pitch Video
+ 
+ Check out [this video](https://www.loom.com/share/17f33095cd914fa9b6ebdeeed48cfbca), where I describe my 
+ project and some challenges I faced while building it.
