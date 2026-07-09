@@ -10,7 +10,7 @@ function getKeywordsText(cards) {
   if (keywords.length === 1) return keywords[0];
   if (keywords.length === 2) return `${keywords[0]} and ${keywords[1]}`;
 
-  return `${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} other`;
+  return `${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} others`;
 }
 
 function SavedNews({ cards = [], currentUser, onDeleteSaved }) {
