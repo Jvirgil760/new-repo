@@ -1,0 +1,26 @@
+.modal__container_type_success {
+    width: 430px;
+    min-height: 182px;
+    padding: 43px 36px 51px;
+  }
+  
+  .modal__success-title {
+    margin: 0 0 14px;
+    max-width: 315px;
+    color: #1a1b22;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 900;
+  }
+  
+  .modal__success-link {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: #2f71e5;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
+  }
