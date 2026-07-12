@@ -168,10 +168,37 @@
     line-height: 24px;
     z-index: 6;
   }
+}
+
+@media screen and (max-width: 480px) {
+  .navigation {
+    position: relative;
+    width: 100%;
+  }
+
+  .navigation__content {
+    min-height: 56px;
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 6;
+  }
+
+  .navigation__logo {
+    font-size: 16px;
+    line-height: 24px;
+    z-index: 6;
+  }
+
+  .navigation__links,
+  .navigation__auth,
+  .navigation__logged-in {
+    display: none;
+  }
 
   .navigation__menu-button {
     display: flex;
-    z-index: 6;
+    z-index: 7;
   }
 
   .navigation__menu {
@@ -181,7 +208,7 @@
 
   .navigation__menu_opened {
     position: absolute;
-    top: 100%;
+    top: 56px;
     left: 0;
     right: 0;
     display: flex;
